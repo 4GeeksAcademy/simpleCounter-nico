@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { Timer } from "./Timer";
 import { BsFillPlayFill,BsPauseFill, BsStopFill} from "react-icons/bs";
+
+
+
+
+
 export const CountDownTimer = () => {
 
 const [hours, setHours] = useState(0);
@@ -42,9 +47,13 @@ function startTimer() {
     }
 }
 
+// Pause the Timer
+
 function pauseTimer() {
     setIsRunning(false);
 }
+
+// Handlers
 
 const changeSeconds = (e) => {
     setSeconds(e.target.value)
@@ -67,15 +76,15 @@ const changeHours = (e) => {
 
             <br/>
 
-            {!isRunning && (<button className="btn btn-accept btn-lg">
+            <button className="btn btn-success btn-lg">
                 <BsFillPlayFill />
-            </button>)}
-            {!isRunning && (<button className="btn btn-warning btn-lg" onClick={pauseTimer}>
+            </button>
+            <button className="btn btn-warning btn-lg">
                 <BsPauseFill />
-            </button>)}
-            {!isRunning && (<button className="btn btn-danger btn-lg">
+            </button>
+            <button className="btn btn-danger btn-lg">
                 <BsStopFill />
-            </button>)}
+            </button>
         </div>
     );
 }
