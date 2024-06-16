@@ -11,22 +11,11 @@
     justify-content: center;
     box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.4);
     padding: 1rem 0;
-    }
-    label {
-        margin-bottom: 0.5rem;
-    }
-    input {
-        width: 100px;
-        margin-right: 1rem;
-        outline: none;
-        border: none;
-        font-size: 3.5rem;
-        font-weight: 600;
-        text-align: center;
-        padding: 0rem 0.5rem;
-        border-radius: 5px;
-    }
-    input:hover{
-        background-color: grey;
+    font-size: 100px;
     }
 
+.bi-clock {
+    width: 60px;
+    height: 80px;
+    margin-right: 60px;
+}
