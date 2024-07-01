@@ -1,34 +1,49 @@
 import React, { useEffect, useState } from "react";
-import {Timer} from "./Timer"
+import { Timer } from "./Timer";
 
 const Home = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
 
-	const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => {
+        if (prevSeconds === 59) {
+          setMinutes(prevMinutes => {
+            if (prevMinutes === 59) {
+              setHours(prevHours => prevHours + 1);
+              return 0;
+            } else {
+              return prevMinutes + 1;
+            }
+          });
+          return 0;
+        } else {
+          return prevSeconds + 1;
+        }
+      });
+    }, 1000);
+  
+    return () => clearInterval(interval);
+  }, []);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setCounter(counter => counter + 1)
-		}, 1000)
+  function calculateDigit(value, placeValue) {
+    return Math.floor((value / placeValue) % 10);
+  }
 
-		return () => clearInterval(interval)
-	}, [counter])
-
-
-	function calculateSeconds(aCounter, placeValue){
-		return Math.floor(aCounter / placeValue) % 10
-	}
-
-
-	return (
-		<div className="text-center">
-			<Timer 
-			thousandsDigit = {calculateSeconds(counter, 1000)}
-			hundredsDigit = {calculateSeconds(counter, 100)}
-			tensDigit = {calculateSeconds(counter, 10)}
-			onesDigit = {calculateSeconds(counter, 1)}
-			/>
-		</div>
-	);
+  return (
+    <div className="text-center">
+      <Timer 
+        thousandsDigit={calculateDigit(hours, 10)}
+        hundredsDigit={calculateDigit(hours, 1)}
+        tensDigit={calculateDigit(minutes, 10)}
+        onesDigit={calculateDigit(minutes, 1)}
+        secondsTensDigit={calculateDigit(seconds, 10)}
+        secondsOnesDigit={calculateDigit(seconds, 1)}
+      />
+    </div>
+  );
 };
 
 export default Home;
